@@ -8,6 +8,8 @@ A summary of how to set up a full Wikipedia.org mirror using three different app
 
 <hr/>
 
+<img src="https://chrischapman.co/images/kiwix/home-page-internal.png" width="500px"/>
+
 </div>
 
 # Intro
