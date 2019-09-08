@@ -2,7 +2,7 @@
 
 <h1>How to self-host a mirror of Wikipedia.org:<br/>with Nginx, Kimix, or MediaWiki/XOWA (w/ Docker)</h1>
     
-<i>Originally published 2019-09-08 on [docs.sweeting.me](https://docs.sweeting.me/s/blog).</i>
+<i>Originally published 2019-09-08 on <a href="https://docs.sweeting.me/s/blog">docs.sweeting.me</a>.<br/>The pretty <a href="https://docs.sweeting.me/s/self-host-a-wikipedia-mirror">HTML version is here</a> and the <a href="https://github.com/pirate/wikipedia-mirror">source for this guide is on Github</a>.</i>
 
 A summary of how to set up a full Wikipedia.org mirror using three different methods.
 
