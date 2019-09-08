@@ -538,7 +538,7 @@ source /opt/wiki/.env
 
 # Download the nginx config template
 curl --silent \
-    "https://gist.github.com/pirate/..." \
+    "https://github.com/pirate/wikipedia-mirror/raw/master/etc/nginx/nginx.conf.template" \
     > "$CONFIG_DIR/nginx.conf.template"
 
 # Fill your config options into nginx.conf.template to create nginx.conf
