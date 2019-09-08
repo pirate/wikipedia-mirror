@@ -533,6 +533,7 @@ LetsEncrypt certs must be renewed every 90 days or they'll expire and you'll get
     https://gregchapple.com/2018/02/16/auto-renew-lets-encrypt-certs-with-systemd-timers/
 
 ### Populate the nginx.conf template with your config
+<!-- {% raw %} -->
 ```bash
 # Load your config options into the environment
 source /opt/wiki/.env
@@ -549,6 +550,7 @@ envsubst \
     < "$CONFIG_DIR/nginx.conf.template" \
     > "$CONFIG_DIR/nginx.conf"
 ```
+<!-- {% endraw %} -->
 
 ### Run Nginx via systemd
 ```bash
