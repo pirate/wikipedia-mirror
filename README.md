@@ -61,7 +61,7 @@ Luckily, regardless of how you choose to rehost Wikipedia ***text***, you are no
 
 ---
 
-[TOC]
+[Table of Contents](https://docs.sweeting.me/s/self-host-a-wikipedia-mirror#TOC) (available in HTML version only)
 
 ---
 
