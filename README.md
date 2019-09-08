@@ -1,15 +1,10 @@
-<div align="center">
+<div align="center" style="text-align:center">
 
-<h1>How to self-host a mirror of Wikipedia.org:<br/>with Nginx, Kimix, or MediaWiki/XOWA (w/ Docker)</h1>
-    
-<i>Originally published 2019-09-08 on <a href="https://docs.sweeting.me/s/blog">docs.sweeting.me</a>.<br/>The pretty <a href="https://docs.sweeting.me/s/self-host-a-wikipedia-mirror">HTML version is here</a> and the <a href="https://github.com/pirate/wikipedia-mirror">source for this guide is on Github</a>.</i>
-
+<h1>How to self-host a mirror of Wikipedia.org:<br/>with Nginx, Kimix, or MediaWiki/XOWA + Docker</h1>
+<i>Originally published 2019-09-08 on <a href="https://docs.sweeting.me/s/blog">docs.sweeting.me</a>.<br/>The pretty <a href="https://docs.sweeting.me/s/self-host-a-wikipedia-mirror">HTML version is here</a> and the <a href="https://github.com/pirate/wikipedia-mirror">source for this guide is on Github</a>.</i><br/><br/>
 A summary of how to set up a full Wikipedia.org mirror using three different approaches.
-
 <hr/>
-
 <img src="https://chrischapman.co/images/kiwix/home-page-internal.png" width="500px"/>
-
 </div>
 
 # Intro
@@ -65,7 +60,9 @@ Luckily, regardless of how you choose to rehost Wikipedia ***text***, you are no
 
 # [Table of Contents](https://docs.sweeting.me/s/self-host-a-wikipedia-mirror#TOC)
 
-See the [HTML version](https://docs.sweeting.me/s/self-host-a-wikipedia-mirror#TOC) of this guide.
+[TOC]
+
+See the [HTML version](https://docs.sweeting.me/s/self-host-a-wikipedia-mirror#TOC) of this guide for the best browsing experience. See [pirate/wikipedia-mirror](https://github.com/pirate/wikipedia-mirror) on Github for example config source, docker-compose files, binaries, folder structure, and more.
 
 ---
 
