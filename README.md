@@ -167,7 +167,7 @@ ZIM archive dumps are usually published yearly, but the release schedule is not 
 **Download your chosen Wikipedia ZIM archive** (e.g. `wikipedia_en_all_novid_2018-10.zim`)
 
 ```bash
-mkdir -p /opt/wiki/data/zim && cd /opt/wiki/data/zim
+mkdir -p /opt/wiki/data/dumps && cd /opt/wiki/data/dumps
 
 # Download via BitTorrent:
 transmission-cli --download-dir . 'magnet:?xt=urn:btih:O2F3E2JKCEEBCULFP2E2MRUGEVFEIHZW'
@@ -251,7 +251,7 @@ Alternatively, check out a similar setup that uses Caddy instead of Nginx as the
 > <span style="color:#444">**Content freshness:**</span> <span style="color:red">Often Stale</span>  
 > ZIM archives are published yearly (ish) by Wikipedia.org.  
 
-First download a ZIM archive dump like `wikipedia_en_all_novid_2018-10.zim` into `/opt/wiki/data/zim` as described above.
+First download a ZIM archive dump like `wikipedia_en_all_novid_2018-10.zim` into `/opt/wiki/data/dumps` as described above.
 
 
 ### a. Running with Docker
@@ -260,7 +260,7 @@ Run `kiwix-serve` with docker like so:
 
 ```bash
 docker run \
-    -v '/opt/wiki/data/zim:/data' \
+    -v '/opt/wiki/data/dumps:/data' \
     -p 8888:80 \
     kiwix/kiwix-serve \
     'wikipedia_en_all_novid_2018-10.zim'
@@ -276,7 +276,7 @@ services:
     ports:
       - '8888:80'
     volumes:
-      - "./data/zim:/data"
+      - "./data/dumps:/data"
 ```
 
 ### b. Running with the static binary
@@ -296,7 +296,7 @@ services:
 2. **Run `kiwix-serve`, passing it a port to listen on and your ZIM archive file**
 
     ```bash
-    /opt/wiki/bin/kiwix-serve --port 8888 /opt/wiki/data/zim/wikipedia_en_all_novid_2018-10.zim
+    /opt/wiki/bin/kiwix-serve --port 8888 /opt/wiki/data/dumps/wikipedia_en_all_novid_2018-10.zim
     ```
 
     Your server should now be running!
