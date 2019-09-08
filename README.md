@@ -208,14 +208,14 @@ transmission-cli --download-dir . 'magnet:?xl=16321006399&dn=enwiki-20190720-pag
 
 ## Method #1: Run a caching proxy in front of Wikipedia.org
 
-> <span style="color:#444">**Complexity:**</span> <span style="color:green">Low</span>
-> Minimal setup and operations requirements, no download of large dumps needed.
-> <span style="color:#444">**Disk space requirements:**</span> <span style="color:orange">On-Demand</span>
-> Disk is only used as pages are requested (can be 1gb up to 2TB+ depending on usage).
-> <span style="color:#444">**CPU requirements:**</span> <span style="color:green">Very Low</span>
-> Lowest out of the three options, can be run on a tiny VPS or home-server.
-> <span style="color:#444">**Content freshness:**</span> <span style="color:green">Very Fresh</span>
-> Configurable to cache content indefinitely or pull fresh data for every request.
+> <span style="color:#444">**Complexity:**</span> <span style="color:green">Low</span>  
+> Minimal setup and operations requirements, no download of large dumps needed.  
+> <span style="color:#444">**Disk space requirements:**</span> <span style="color:orange">On-Demand</span>  
+> Disk is only used as pages are requested (can be 1gb up to 2TB+ depending on usage).  
+> <span style="color:#444">**CPU requirements:**</span> <span style="color:green">Very Low</span>  
+> Lowest out of the three options, can be run on a tiny VPS or home-server.  
+> <span style="color:#444">**Content freshness:**</span> <span style="color:green">Very Fresh</span>  
+> Configurable to cache content indefinitely or pull fresh data for every request.  
 
 ### a. Running with Nginx
 
@@ -240,14 +240,14 @@ Alternatively, check out a similar setup that uses Caddy instead of Nginx as the
 
 ## Method #2: Serve the static HTML ZIM archive with Kiwix
 
-> <span style="color:#444">**Complexity:**</span> <span style="color:orange">Moderate</span>
-> Static binary makes it easy to run, but it requires downloading a large dump file.
-> <span style="color:#444">**Disk space requirements:**</span> <span style="color:green">&gt;80GB</span>
-> The ZIM archive is a highly-compressed collection of static HTML articles only.
-> <span style="color:#444">**CPU requirements:**</span> <span style="color:green">Very Low</span>
-> Low, especially with a CDN in front (more than a proxy, but less than a full server).
-> <span style="color:#444">**Content freshness:**</span> <span style="color:red">Often Stale</span>
-> ZIM archives are published yearly (ish) by Wikipedia.org.
+> <span style="color:#444">**Complexity:**</span> <span style="color:orange">Moderate</span>  
+> Static binary makes it easy to run, but it requires downloading a large dump file.  
+> <span style="color:#444">**Disk space requirements:**</span> <span style="color:green">&gt;80GB</span>  
+> The ZIM archive is a highly-compressed collection of static HTML articles only.  
+> <span style="color:#444">**CPU requirements:**</span> <span style="color:green">Very Low</span>  
+> Low, especially with a CDN in front (more than a proxy, but less than a full server).  
+> <span style="color:#444">**Content freshness:**</span> <span style="color:red">Often Stale</span>  
+> ZIM archives are published yearly (ish) by Wikipedia.org.  
 
 First download a ZIM archive dump like `wikipedia_en_all_novid_2018-10.zim` into `/opt/wiki/data/zim` as described above.
 
@@ -321,14 +321,14 @@ Visit https://en.yourdomainhere.com to see it in action (e.g. https://en.wiki.ex
 
 ## Method #3: Run a full MediaWiki server
 
-> <span style="color:#444">**Complexity:**</span> <span style="color:red">Very High</span>
-> Complex multi-component setup with an intricate setup process and high resource use.
-> <span style="color:#444">**Disk space requirements:**</span> <span style="color:red">&gt;550GB (>2TB needed for import phase)</span>
->  The uncompressed database is very large (multiple TB with revision history and stubs).
-> <span style="color:#444">**CPU requirements:**</span> <span style="color:orange">Moderate (very high during import phase)</span>
->  Depends on usage, but it's the most demanding out of the 3 options.
-> <span style="color:#444">**Content freshness:**</span> <span style="color:green">Very fresh</span>
-> Udpated database dumps are published monthly (ish) by Wikipedia.org.
+> <span style="color:#444">**Complexity:**</span> <span style="color:red">Very High</span>  
+> Complex multi-component setup with an intricate setup process and high resource use.  
+> <span style="color:#444">**Disk space requirements:**</span> <span style="color:red">&gt;550GB (>2TB needed for import phase)</span>  
+>  The uncompressed database is very large (multiple TB with revision history and stubs).  
+> <span style="color:#444">**CPU requirements:**</span> <span style="color:orange">Moderate (very high during import phase)</span>  
+>  Depends on usage, but it's the most demanding out of the 3 options.  
+> <span style="color:#444">**Content freshness:**</span> <span style="color:green">Very fresh</span>  
+> Udpated database dumps are published monthly (ish) by Wikipedia.org.  
 
 First download a database dump like [`enwiki-20190720-pages-articles.xml.bz2`](magnet:?xl=16321006399&dn=enwiki-20190720-pages-articles.xml.bz2&xt=urn:tree:tiger:zpqgda3rbnycgtcujwpqi72aiv7tyasw7rp7sdi&xt=urn:ed2k:3b291214eb785df5b21cdb62623dd319&xt=urn:aich:zuy4dfbo2ppdhsdtmlev72fggdnka6ch&xt=urn:btih:9f08161276bc95ec594ce89ed52fe18fc41168a3&xt=urn:sha1:54cbdd5e5d1ca22b7dbd16463f81fdbcd6207bab&xt=urn:md5:9be9c811e0cc5c8418c869bb33eb516c&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80&as=http%3a%2f%2fdumps.wikimedia.freemirror.org%2fenwiki%2f20190720%2fenwiki-20190720-pages-articles.xml.bz2&as=http%3a%2f%2fdumps.wikimedia.your.org%2fenwiki%2f20190720%2fenwiki-20190720-pages-articles.xml.bz2&as=http%3a%2f%2fftp.acc.umu.se%2fmirror%2fwikimedia.org%2fdumps%2fenwiki%2f20190720%2fenwiki-20190720-pages-articles.xml.bz2&as=https%3a%2f%2fdumps.wikimedia.freemirror.org%2fenwiki%2f20190720%2fenwiki-20190720-pages-articles.xml.bz2&as=https%3a%2f%2fdumps.wikimedia.your.org%2fenwiki%2f20190720%2fenwiki-20190720-pages-articles.xml.bz2&as=https%3a%2f%2fftp.acc.umu.se%2fmirror%2fwikimedia.org%2fdumps%2fenwiki%2f20190720%2fenwiki-20190720-pages-articles.xml.bz2&as=https%3a%2f%2fdumps.wikimedia.org%2fenwiki%2f20190720%2fenwiki-20190720-pages-articles.xml.bz2) into `/opt/wiki/data/dumps` as described above.
 
