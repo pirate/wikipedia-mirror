@@ -14,11 +14,11 @@ A summary of how to set up a full Wikipedia.org mirror using three different app
 
 # Intro
 
-> **Did you know that Wikipedia.org only [runs on 5 servers](https://meta.wikimedia.org/wiki/Wikimedia_servers)**? 🤯
+> **Did you know that Wikipedia.org only [runs on 5 main servers](https://meta.wikimedia.org/wiki/Wikimedia_servers)**? 🤯
 
 **Unfortunately, Wikipedia attracts lots of hate from people and nation-states who object to certain articles or want to hide information from the public eye.**
 
-Wikipedia's 5 servers (2 in the USA, 1 in Holland, and 1 in Singapore, + CDNs) [cant always stand up to large DDoS attacks](https://wikimediafoundation.org/news/2019/09/07/malicious-attack-on-wikipedia-what-we-know-and-what-were-doing/), but thankfully they provide regular database dumps and static HTML archives to the public, and have permissive licensing that allows for rehosting with modification (even for profit!).
+Wikipedia's infrastructure (2 racks the USA, 1 in Holland, and 1 in Singapore, + CDNs) [cant always stand up to large DDoS attacks](https://wikimediafoundation.org/news/2019/09/07/malicious-attack-on-wikipedia-what-we-know-and-what-were-doing/), but thankfully they provide regular database dumps and static HTML archives to the public, and have permissive licensing that allows for rehosting with modification (even for profit!).
 
 Growing up in China [behind the GFC I often experienced Wikipedia unavailability](https://www.cnet.com/news/the-great-firewall-of-china-blocks-off-wikipedia/), and in light of the [recent DDoS](https://wikimediafoundation.org/news/2019/09/07/malicious-attack-on-wikipedia-what-we-know-and-what-were-doing/) I decided to make a guide for people to help demystify the process of running a mirror. I'm also a big advocate for free access to information, and I'm the maintainer of a major internet archiving project called [ArchiveBox](https://archivebox.io) (a self-hosted internet archiver powered by headless Chromium).
 
