@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>How to self-host a mirror of Wikipedia.org:<br/>Zimix, Nginx, MediaWiki, XOWA, Docker</h1>
+<h1>How to self-host a mirror of Wikipedia.org:<br/>with Nginx, Kimix, or MediaWiki/XOWA (w/ Docker)</h1>
     
 <i>Originally published 2019-09-08 on [docs.sweeting.me](https://docs.sweeting.me/s/blog).</i>
 
