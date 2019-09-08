@@ -414,13 +414,15 @@ php /var/www/html/maintenance/importDump.php enwiki-20170320-pages-articles-mult
 
 **Instead, convert the XML dump into compressed chunks of SQL then import individually:**
 
+*Warning: For large imports (e.g. English) this process can still take 5+ days depending on the system.*
+
 ```bash
 apt install -y openjdk-8-jre zstd pbzip2
 
 # Download patched mwdumper version and pre/post import SQL scripts
-wget "https://github.com/wayneworkman/wikipedia-importing-tools/raw/master/mwdumper-1.26.jar"
-wget "https://github.com/wayneworkman/wikipedia-importing-tools/raw/master/preimport.sql"
-wget "https://github.com/wayneworkman/wikipedia-importing-tools/raw/master/postimport.sql"
+wget "https://github.com/pirate/wikipedia-mirror/raw/master/bin/mwdumper-1.26.jar"
+wget "https://github.com/pirate/wikipedia-mirror/raw/master/preimport.sql"
+wget "https://github.com/pirate/wikipedia-mirror/raw/master/postimport.sql"
 
 DUMP_NAME="enwiki-20190720-pages-articles"
 
@@ -453,7 +455,7 @@ for partial in $(ls *.sql.zst); do
 done
 ```
 
-*Warning: For large imports (e.g. English) this process can still take 5+ days depending on the system.*
+<sup>Credit for these steps goes to https://github.com/wayneworkman/wikipedia-importing-tools.</sup>
 
 
 ### Optional Nginx Reverse Proxy
