@@ -1,0 +1,7 @@
+data/cache/*
+data/certs/*
+data/logs/*
+data/zim/*
+data/dumps/*
+*.xml
+*.xml.bz2
