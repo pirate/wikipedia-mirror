@@ -1,0 +1,180 @@
+daemon                                      on;
+user                                        www-data;
+pid                                         /var/run/nginx.pid;
+timer_resolution                            100ms;
+worker_processes                            auto;
+events {
+    worker_connections                      1024;
+}
+
+http {
+    # Logging Settings
+    log_format trace                        '$remote_addr - $remote_user [$time_local] "$request" '
+                                            '$status $body_bytes_sent "$http_referer" "$http_user_agent" '
+                                            '"$http_x_forwarded_for" $request_id';
+    access_log                              $ACCESS_LOG;
+    error_log                               $ERROR_LOG;
+
+    # MIME Type Settings
+    types_hash_max_size                     512;
+    default_type                            application/octet-stream;
+    include                                 /etc/nginx/mime.types;
+
+    # GZIP Settings
+    gzip                on;
+    gzip_vary           on;
+    gzip_proxied        any;
+    gzip_comp_level     6;
+    gzip_min_length     1000;
+    gzip_buffers        4 32k;
+    gzip_types          text/plain
+                        text/css
+                        text/xml
+                        
+                        font/ttf
+                        font/woff
+                        font/woff2
+                        
+                        application/json
+                        application/xhtml+xml
+                        application/rss+xml
+                        application/atom_xml
+                        application/javascript
+                        application/x-javascript;
+
+
+    # Connection Settings
+    resolver                                1.1.1.1 8.8.8.8;    # DNS server to use when resolving hosts for upstreams or cert chains
+    resolver_timeout                        5s;                 # timeout DNS requests as failed after this many seconds waiting for a response
+    tcp_nopush                              on;                 # enables NGINX to send HTTP response headers in one packet right after the chunk of data has been obtained by sendfile()
+    tcp_nodelay                             on;                 # don't wait 200ms to collect response headers and data before sending directly from filesystem
+    port_in_redirect                        off;                # when proxying redirects, strip any custom upstream ports from the url sent to the client
+    slice                                   1m;                 # allow breaking up files into slices so as not to block on loading an entire file to only request a small range
+    sendfile                                on;                 # send static files direclty from filesystem without buffering in memory
+    sendfile_max_chunk                      2m;                 # limit each filesystem chunk sent to 1mb to prevent one connection from eating all resources
+    send_timeout                            20s;                # wait up to 20s before closing response connections where client has stopped accepting response data
+    keepalive_timeout                       60s;                # allow up to 60s total before closing unresponsive/dead request connections
+    client_header_timeout                   15s;                # don't wait more than 15s for client to send request headers
+    client_body_timeout                     15s;                # don't wait more than 15s for client to send request body
+    client_max_body_size                    50m;                # maximum file upload / request size (increase to allow larger file uploads)
+    client_body_buffer_size                 16k;                # buffer size for reading client request body (should be 2 pages, aka 16k on 64bit systems)
+    client_header_buffer_size               1k;                 # buffer size for reading client request header (for most requests, a buffer of 1K bytes is enough unless there are long cookies)
+    large_client_header_buffers             4 8k;               # maximum number and size of buffers used for reading large client request header (A request line cannot exceed the size of one buffer)
+    http2_push_preload                      on;                 # enable http2 pushing of files before client requests them
+    http2_max_concurrent_pushes             10;                 # limit concurrent server pushes to prevent overwhelming client
+    http2_max_concurrent_streams            128;                # maximum number of concurrent HTTP/2 streams in a connection
+
+    # Security Settings
+    ssl_stapling                            on;                 # instruct clients to only allow site to be served with local SSL cert
+    ssl_stapling_verify                     on;                 # check to make sure no one else is serving with a different cert
+    ssl_protocols                           TLSv1.2 TLSv1.3;    # only allow modern SSL protocols
+    ssl_session_cache                       shared:SSL:50m;     # enable quick-resume of previous ssl sessions
+    ssl_session_timeout                     5d;                 # store ssl session cache entries for 5 days
+    ssl_session_tickets                     off;                # session tickets break forward secrecy
+    ssl_ciphers                             ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS;
+    ssl_ecdh_curve                          secp384r1;          # use a strong curve function for encryption
+    ssl_prefer_server_ciphers               on;                 # prevent downgrade attacks to weaker cipher suites
+    server_tokens                           off;                # hide nginx version info in error pages and headers
+    
+    # Reverse Proxy Settings
+    proxy_socket_keepalive                  on;                 # keep the upstream connection open instead of opening a new connection every time
+    proxy_request_buffering                 off;                # dont wait for the full request to arrive before passing body to upstream
+    proxy_buffering                         off;                # dont wait for full response to complete before passing body to client
+    proxy_http_version                      1.1;                # Properly proxy websocket connections
+    proxy_read_timeout                      120s;               # terminate websockets/dead nginx<-django connections afer 5min of inactivity
+    proxy_cache_path                        "$CACHE_DIR" levels=1:2 keys_zone=main:16M max_size=$CACHE_SIZE inactive=1440h use_temp_path=off;
+    proxy_cache_key                         "$request_uri$is_args$args$slice_range";
+    proxy_cache_methods                     $CACHE_REQUESTS;
+    proxy_cache_valid                       $CACHE_RESPONSES $CACHE_DURATION;
+    proxy_cache_valid                       404      10m;       # allow articles not found to be refreshed more frequently than cache duration in case they're created
+    # proxy_cache_bypass                    $http_cache_control;    # bypass cache if client requests with Cache-Control: max-age=0
+    proxy_cache_use_stale                   error updating invalid_header timeout http_500 http_502 http_503 http_504;
+    proxy_cache_revalidate                  on;                 # use If-Modified-Since to revalidate cached requests if they expire instead of re-downloading full response
+    proxy_cache_lock                        on;                 # if 2 requests come in, try to only make 1 upstream request to handle them both
+    proxy_cache_lock_age                    5s;                 # timeout to wait for in-progress caching before sending request directly to upstream
+    proxy_cache_lock_timeout                5s;                 # timeout to wait for in-progress caching before sending request directly to upstream
+    proxy_ignore_headers                    X-Accel-Expires;    # ignore upstream caching recommendations for nginx response caching
+    proxy_ignore_headers                    Expires;            # ignore upstream caching recommendations for nginx response caching
+    proxy_ignore_headers                    Cache-Control;      # ignore upstream caching recommendations for nginx response caching
+    proxy_ignore_headers                    Set-Cookie;         # cache responses even when cookies are set
+    proxy_hide_header                       X-Accel-Expires;    # hide upstream caching recommendation from client
+    proxy_hide_header                       Expires;            # hide upstream caching recommendation from client
+    proxy_hide_header                       Cache-Control;      # hide upstream caching recommendation from client
+    # proxy_hide_header                     "Set-Cookie";       # prevent upstream cookies being set on clients at all
+    proxy_cookie_domain                     .$UPSTREAM_HOST $host;  # rewrite cookie domains to proxied equivalents
+    proxy_cookie_domain                     $UPSTREAM_HOST $host;   # rewrite cookie domains to proxied equivalents
+    proxy_cookie_domain                     $UPSTREAM_WIKI $host;   # rewrite cookie domains to proxied equivalents
+    proxy_cookie_domain                     $UPSTREAM_MEDIA $host;  # rewrite cookie domains to proxied equivalents
+
+
+    # Server Definition
+    server {
+        listen                              $LISTEN_PORT_HTTP default_server;
+        listen                              $LISTEN_PORT_HTTPS ssl http2 default_server;
+
+        server_name                         $LISTEN_HOST $LISTEN_WIKI $LISTEN_MEDIA
+                                            $UPSTREAM_HOST $UPSTREAM_WIKI $UPSTREAM_MEDIA;
+
+        ssl_certificate_key                 $SSL_KEY;
+        ssl_certificate                     $SSL_CRT;
+        ssl_trusted_certificate             $SSL_CRT;
+        ssl_dhparam                         $SSL_DH;
+
+        proxy_cache                         wikiproxy;
+
+        error_page                          497 https://$host$request_uri;      # redirect http:443 to https:443
+        if ($scheme = http) {
+            return                          301 https://$host$request_uri;      # redirect http:80 to https:443
+        }
+
+        location / {
+            try_files                               $uri $uri/ @upstream;
+
+            # Replace any domains in response body text with proxied equivalents
+            subs_filter_types                       text/html text/css text/xml text/javascript;
+            subs_filter                             $UPSTREAM_WIKI $LISTEN_WIKI gi;
+            subs_filter                             $UPSTREAM_MEDIA $LISTEN_MEDIA gi;
+            subs_filter                             $UPSTREAM_HOST $LISTEN_HOST gi;
+
+            # Add headers to the response sent to the client
+            add_header Cache-Control                "public";
+            add_header X-Handled-By                 "$upstream_addr"; 
+            add_header X-Cache-Status               "$upstream_cache_status";
+            add_header X-Request-Id                 "$request_id";
+            add_header X-Content-Type-Options       "nosniff";
+            add_header X-XSS-Protection             "1; mode=block";
+            add_header Referrer-Policy              "strict-origin-when-cross-origin";
+            add_header Strict-Transport-Security    "max-age=31536000; includeSubDomains";
+            add_header X-Robots-Tag                 "noindex";
+            
+            # Cache responses for the configured amount of time
+            expires                                 $CACHE_DURATION;
+        }
+
+        location @upstream {
+            if ($host ~ "^($LISTEN_HOST|$UPSTREAM_HOST)$") {
+                set                                 $xupstream $UPSTREAM_HOST;
+            }
+            if ($host ~ "^($LISTEN_WIKI|$UPSTREAM_WIKI)$") {
+                set                                 $xupstream $UPSTREAM_WIKI;
+            }
+            if ($host ~ "^($LISTEN_MEDIA|$UPSTREAM_MEDIA)$") {
+                set                                 $xupstream $UPSTREAM_MEDIA;
+            }
+
+            # Add headers to the request sent to the upstream server
+            proxy_set_header Host                   "$xupstream";
+            proxy_set_header Range                  "$slice_range";
+            proxy_set_header Upgrade                "$http_upgrade";
+            proxy_set_header Connection             "upgrade";
+            proxy_set_header X-Request-Id           "$request_id";
+            proxy_set_header X-Real-Ip              "$remote_addr";
+            proxy_set_header X-Forwarded-Host       "$host";
+            proxy_set_header X-Forwarded-Server     "$host";
+            proxy_set_header X-Forwarded-For        "$proxy_add_x_forwarded_for";
+            proxy_set_header X-Forwarded-Protocol   "$scheme";
+
+            proxy_pass                              https://$xupstream;
+        }
+    }
+}
