@@ -1,0 +1,8 @@
+version: '3'
+services:
+  xowa:
+    image: sblop/xowa_offline_wikipedia
+    ports:
+      - 8888:80
+    volumes:
+      - './data/xowa:/opt/xowa'

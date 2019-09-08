@@ -1,0 +1,22 @@
+version: '3'
+services:
+  database:
+    image: mariadb
+    command: --max-allowed-packet=256M
+    environment:
+      MYSQL_DATABASE: wikipedia
+      MYSQL_USER: wikipedia
+      MYSQL_PASSWORD: wikipedia
+      MYSQL_ROOT_PASSWORD: wikipedia
+
+  mediawiki:
+    image: mediawiki
+    ports:
+      - 8080:80
+    depends_on:
+      - database
+    volumes:
+      - './data/html:/var/www/html'
+      # After initial setup, download LocalSettings.php into ./data/html
+      # and uncomment the following line, then docker-compose restart
+      # - ./LocalSettings.php:/var/www/html/LocalSettings.php

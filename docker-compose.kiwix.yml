@@ -1,0 +1,9 @@
+version: '3'
+services:
+  kiwix:
+    image: kiwix/kiwix-serve
+    command: 'wikipedia_en_all_novid_2018-10.zim'
+    ports:
+      - '8888:80'
+    volumes:
+      - "./data/zim:/data"
