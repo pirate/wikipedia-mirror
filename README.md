@@ -9,7 +9,7 @@ A summary of how to set up a full Wikipedia.org mirror using three different app
 
 # Intro
 
-> **Did you know that Wikipedia.org only [runs on 5 main servers](https://meta.wikimedia.org/wiki/Wikimedia_servers)**? 🤯
+> **Did you know that Wikipedia.org just runs a mostly-traditional LAMP stack on [350 servers](https://meta.wikimedia.org/wiki/Wikimedia_servers)**?
 
 **Unfortunately, Wikipedia attracts lots of hate from people and nation-states who object to certain articles or want to hide information from the public eye.**
 
