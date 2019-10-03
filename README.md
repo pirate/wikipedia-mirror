@@ -74,7 +74,7 @@ See the [HTML version](https://docs.sweeting.me/s/self-host-a-wikipedia-mirror#T
 
 1. **Provision a server to act as your Wikipedia mirror**
 
-   You can use a cheap VPS provider like DigitalOcean, Vultr, Hertzner, etc. For the static ZIM archive and MediaWiki server methods you will need significant disk space, so a home server with a cheap external HD may be a better option.
+   You can use a cheap VPS provider like DigitalOcean, Vultr, Hetzner, etc. For the static ZIM archive and MediaWiki server methods you will need significant disk space, so a home server with a cheap external HD may be a better option.
    
    *The setup examples below are based on Ubuntu 19.04* running on a home server, however they should work across many other OS's with minimal tweaking (e.g. FreeBSD, macOS, Arch, etc.).
 
