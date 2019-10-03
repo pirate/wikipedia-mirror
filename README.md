@@ -2,7 +2,8 @@
 
 <h1>How to self-host a mirror of Wikipedia.org:<br/>with Nginx, Kimix, or MediaWiki/XOWA + Docker</h1>
 <i>Originally published 2019-09-08 on <a href="https://docs.sweeting.me/s/blog">docs.sweeting.me</a>.<br/>The pretty <a href="https://docs.sweeting.me/s/self-host-a-wikipedia-mirror">HTML version is here</a> and the <a href="https://github.com/pirate/wikipedia-mirror">source for this guide is on Github</a>.</i><br/><br/>
-A summary of how to set up a full Wikipedia.org mirror using three different approaches.
+A summary of how to set up a full Wikipedia.org mirror using three different approaches.<br/>
+<b>DEMO: https://other-wiki.zervice.io</b>
 <hr/>
 <img src="https://chrischapman.co/images/kiwix/home-page-internal.png" width="500px"/>
 </div>
@@ -23,8 +24,10 @@ Growing up in China [behind the GFC I often experienced Wikipedia unavailability
 
 ## TL;DR
 
+**DEMO: https://other-wiki.zervice.io**
+
 ```bash
-# 1. Download the all-in-one Kiwix-Serve binary
+# 1. Download the all-in-one Kiwix-Serve binary from https://www.kiwix.org/en/downloads/kiwix-serve/
 wget 'https://mirrors.dotsrc.org/kiwix/release/kiwix-tools/kiwix-tools_linux-x86_64-3.0.1.tar.gz'
 tar -xzf kiwix-tools_linux-x86_64-3.0.1.tar.gz && cd kiwix-tools_linux-x86_64-3.0.1
 
