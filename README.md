@@ -24,20 +24,16 @@ Growing up in China [behind the GFC I often experienced Wikipedia unavailability
 ## TL;DR
 
 ```bash
-# Download the all-in-one Kiwix-Serve binary
+# 1. Download the all-in-one Kiwix-Serve binary
 wget 'https://mirrors.dotsrc.org/kiwix/release/kiwix-tools/kiwix-tools_linux-x86_64-3.0.1.tar.gz'
-tar -xzf kiwix-tools_linux-x86_64-3.0.1.tar.gz
-cd kiwix-tools_linux-x86_64-3.0.1
+tar -xzf kiwix-tools_linux-x86_64-3.0.1.tar.gz && cd kiwix-tools_linux-x86_64-3.0.1
 
-# Download a compressed Wikipedia dump from https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/
+# 2. Download a compressed Wikipedia dump from https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/
 wget --continue "http://download.kiwix.org/zim/wikipedia_en_all_novid.zim"
 
-# Run the kiwix server, then visit http://127.0.0.1:8888
+# 3. Start the kiwix server, then visit http://127.0.0.1:8888
 ./kiwix-serve --verbose --port 8888 "$PWD/wikipedia_en_all_novid_2018-10.zim"
-
-
-# Optional: Add caching and HTTPS/2 w/ a CDN/caching layer like Nginx, Caddy, Cloudflare, e.g.:
-cloudflared tunnel --url http://127.0.0.1:8888 --hostname public-wiki-mirror.example.com
+```
 ---
 
 
