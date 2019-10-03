@@ -19,6 +19,28 @@ Growing up in China [behind the GFC I often experienced Wikipedia unavailability
 
 **This aim of this guide is to encourage people to use these publicly available dumps to host Wikipedia mirrors, so that malicious actors don't succeed in limiting public access to one of the *world's best sources of information*.**
 
+---
+
+## TL;DR
+
+```bash
+# Download the all-in-one Kiwix-Serve binary
+wget 'https://mirrors.dotsrc.org/kiwix/release/kiwix-tools/kiwix-tools_linux-x86_64-3.0.1.tar.gz'
+tar -xzf kiwix-tools_linux-x86_64-3.0.1.tar.gz
+cd kiwix-tools_linux-x86_64-3.0.1
+
+# Download a compressed Wikipedia dump from https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/
+wget --continue "http://download.kiwix.org/zim/wikipedia_en_all_novid.zim"
+
+# Run the kiwix server, then visit http://127.0.0.1:8888
+./kiwix-serve --verbose --port 8888 "$PWD/wikipedia_en_all_novid_2018-10.zim"
+
+
+# Optional: Add caching and HTTPS/2 w/ a CDN/caching layer like Nginx, Caddy, Cloudflare, e.g.:
+cloudflared tunnel --url http://127.0.0.1:8888 --hostname public-wiki-mirror.example.com
+---
+
+
 ## Getting Started
 
 Wikipedia.org itself is powered by a PHP backend called [WikiMedia](https://en.wikipedia.org/wiki/MediaWiki), using MariaDB for data storage, Varnish and Memcached for request and query caching, and ElasticSearch for full-text search. Production Wikipedia.org also runs a number of extra plugins and modules on top of MediaWiki.
@@ -26,7 +48,7 @@ Wikipedia.org itself is powered by a PHP backend called [WikiMedia](https://en.w
 **🖥 There are several ways to host your own mirror of Wikipedia (with varying complexity):**
 
 1. [**Run a caching proxy in front of Wikipedia.org**](#) (disk used on-demand for cache, low CPU use)
-2. [**Serve the static HTML ZIM archive with Kiwix**](#) (~80GB for compressed archive, low CPU use)
+2. [**Serve the static HTML ZIM archive with Kiwix**](#) (10~80GB for compressed archive, low CPU use)
 3. [**Run a full MediaWiki server**](#) (hardest to set up, ~600GB for XML & database, high CPU use)
 
 **💅Don't expect it to look perfect on the first try**
@@ -157,7 +179,11 @@ Wikipedia HTML dumps are provided in a highly-compressed web-archiving format ca
 
 ZIM archive dumps are usually published yearly, but the release schedule is not guaranteed. As of August 2019 the latest available dump containing all English articles is from October 2018:
 
-**[`wikipedia_en_all_novid_2018-10.zim`](http://download.kiwix.org/zim/wikipedia_en_all_novid.zim)** (79GB, all English articles, no pictures/videos)
+[`wikipedia_en_all_mini_2019-09.zim`](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_mini_2019-09.zim) (10GB, mini English articles, no pictures or video)
+
+[`wikipedia_en_all_nopic_2018-09.zim`](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic_2018-09.zim) (35GB, all English articles, no pictures or video)
+
+**[`wikipedia_en_all_novid_2018-10.zim`](http://download.kiwix.org/zim/wikipedia_en_all_novid.zim)** (79GB, all English articles w/ pictures, no video)
 
 [`wikipedia_en_simple_all_novid_2019-05.zim`](https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/wikipedia_en_simple_all_novid_2019-05.zim) (1.6GB, SimpleWiki English only, good for testing)
 
