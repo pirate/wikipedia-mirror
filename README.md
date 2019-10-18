@@ -22,7 +22,9 @@ Growing up in China [behind the GFC I often experienced Wikipedia unavailability
 
 ---
 
-## TL;DR
+## Quickstart
+
+A *full* English Wikipedia.org clone in 3 steps.
 
 **DEMO: https://other-wiki.zervice.io**
 
