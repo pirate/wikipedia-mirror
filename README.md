@@ -29,11 +29,11 @@ A *full* English Wikipedia.org clone in 3 steps.
 **DEMO: https://other-wiki.zervice.io**
 
 ```bash
-# 1. Download the all-in-one Kiwix-Serve binary from https://www.kiwix.org/en/downloads/kiwix-serve/
+# 1. Download the Kiwix-Serve static binary from https://www.kiwix.org/en/downloads/kiwix-serve/
 wget 'https://mirrors.dotsrc.org/kiwix/release/kiwix-tools/kiwix-tools_linux-x86_64-3.0.1.tar.gz'
 tar -xzf kiwix-tools_linux-x86_64-3.0.1.tar.gz && cd kiwix-tools_linux-x86_64-3.0.1
 
-# 2. Download a compressed Wikipedia dump from https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/
+# 2. Download a compressed Wikipedia dump from https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/ (79GB, images included!)
 wget --continue "http://download.kiwix.org/zim/wikipedia_en_all_novid.zim"
 
 # 3. Start the kiwix server, then visit http://127.0.0.1:8888
