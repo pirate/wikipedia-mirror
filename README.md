@@ -30,14 +30,14 @@ A *full* English Wikipedia.org clone in 3 steps.
 
 ```bash
 # 1. Download the Kiwix-Serve static binary from https://www.kiwix.org/en/downloads/kiwix-serve/
-wget 'https://mirrors.dotsrc.org/kiwix/release/kiwix-tools/kiwix-tools_linux-x86_64-3.0.1.tar.gz'
+wget 'https://download.kiwix.org/release/kiwix-tools/kiwix-tools_linux-x86_64.tar.gz'
 tar -xzf kiwix-tools_linux-x86_64-3.0.1.tar.gz && cd kiwix-tools_linux-x86_64-3.0.1
 
 # 2. Download a compressed Wikipedia dump from https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/ (79GB, images included!)
-wget --continue "http://download.kiwix.org/zim/wikipedia_en_all_novid.zim"
+wget --continue "https://download.kiwix.org/zim/wikipedia_en_all_maxi.zim"
 
 # 3. Start the kiwix server, then visit http://127.0.0.1:8888
-./kiwix-serve --verbose --port 8888 "$PWD/wikipedia_en_all_novid_2018-10.zim"
+./kiwix-serve --verbose --port 8888 "$PWD/wikipedia_en_all_maxi_2018-10.zim"
 ```
 ---
 
@@ -58,7 +58,7 @@ Setting up a Wikipidea mirror involves a complex dance between software, data, a
 
 **✅ Choosing an approach**
 
-Each method in this guide has its pros and cons. A caching proxy is the most lightweight option, but if the upstream servers go down and a request comes in that hasn't been seen before and cached it will 404, so it's not a fully redundant mirror. The static ZIM mirror is lightweight to download and host (and requests are easy to cache) but it has no interactivity, full-text search capability, or Wikipedia-style category index pages. MediaWiki/XOWA are the most complex, but they can provide a full working Wikipedia mirror complete with history revisions, users, talk pages, search, and more. 
+Each method in this guide has its pros and cons. A caching proxy is the most lightweight option, but if the upstream servers go down and a request comes in that hasn't been seen before and cached it will 404, so it's not a fully redundant mirror. The static ZIM mirror is lightweight to download and host (and requests are easy to cache), it has full-text search, but it has no interactivity, talk page history, or Wikipedia-style category pages (though they are coming soon). MediaWiki/XOWA are the most complex, but they can provide a full working Wikipedia mirror complete with history revisions, users, talk pages, search, and more. 
 
 Running a full MediaWiki server is by far the hardest method to set up. Expect it to take multiple days/weeks depending on available system resources, and expect it to look fairly broken since the production Wikipedia.org team run many tweaks and plugins that take extra work to set up locally.
 
@@ -164,6 +164,7 @@ See the [HTML version](https://docs.sweeting.me/s/self-host-a-wikipedia-mirror#T
 
 ## Choosing a Wikipedia archive dump
 
+- https://download.kiwix.org/zim/wikipedia/ (for BitTorrent add `.torrent` to the end of any `.zim` url)
 - https://en.wikipedia.org/wiki/MediaWiki
 - https://www.mediawiki.org/wiki/MediaWiki
 - https://www.mediawiki.org/wiki/Download
@@ -174,21 +175,21 @@ See the [HTML version](https://docs.sweeting.me/s/self-host-a-wikipedia-mirror#T
 
 Wikipedia HTML dumps are provided in a highly-compressed web-archiving format called [ZIM](https://openzim.org). They can be served using a ZIM server like Kiwix (the most common one), or [ZimReader](https://openzim.org/wiki/Zimreader), [GoZIM](https://github.com/akhenakh/gozim), & [others](https://openzim.org/wiki/Readers).
 
-- [Kiwix.org ZIM archive list](https://wiki.kiwix.org/wiki/Content_in_all_languages)
+- [Kiwix.org full ZIM archive list](https://wiki.kiwix.org/wiki/Content_in_all_languages) or [Kiwix.org Wikipedia-specific ZIM archive list](https://download.kiwix.org/zim/wikipedia/)
 - [Wikimedia.org ZIM archive list](https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/)
 - [List of ZIM BitTorrent links](https://gist.github.com/maxogden/70674db0b5b181b8eeb1d3f9b638ab2a)
 
 ZIM archive dumps are usually published yearly, but the release schedule is not guaranteed. As of August 2019 the latest available dump containing all English articles is from October 2018:
 
-[`wikipedia_en_all_mini_2019-09.zim`](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_mini_2019-09.zim) (10GB, mini English articles, no pictures or video)
+[`wikipedia_en_all_mini_2019-09.zim`](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_mini_2019-09.zim) ([torrent](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_mini_2019-09.zim.torrent)) (10GB, mini English articles, no pictures or video)
 
-[`wikipedia_en_all_nopic_2018-09.zim`](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic_2018-09.zim) (35GB, all English articles, no pictures or video)
+[`wikipedia_en_all_nopic_2018-09.zim`](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic_2018-09.zim) ([torrent](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic_2018-09.zim.torrent)) (35GB, all English articles, no pictures or video)
 
-**[`wikipedia_en_all_novid_2018-10.zim`](http://download.kiwix.org/zim/wikipedia_en_all_novid.zim)** (79GB, all English articles w/ pictures, no video)
+**[`wikipedia_en_all_maxi_2018-10.zim`](https://download.kiwix.org/zim/wikipedia_en_all_maxi.zim)** ((torrent)[https://download.kiwix.org/zim/wikipedia_en_all_maxi.zim.torrent]) (79GB, all English articles w/ pictures, no video)
 
-[`wikipedia_en_simple_all_novid_2019-05.zim`](https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/wikipedia_en_simple_all_novid_2019-05.zim) (1.6GB, SimpleWiki English only, good for testing)
+[`wikipedia_en_simple_all_maxi_2020-01.zim`](https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/wikipedia_en_simple_all_maxi_2020-01.zim) (1.6GB, SimpleWiki English only, good for testing)
 
-**Download your chosen Wikipedia ZIM archive** (e.g. `wikipedia_en_all_novid_2018-10.zim`)
+**Download your chosen Wikipedia ZIM archive** (e.g. `wikipedia_en_all_maxi_2018-10.zim`)
 
 ```bash
 mkdir -p /opt/wiki/data/dumps && cd /opt/wiki/data/dumps
@@ -197,13 +198,13 @@ mkdir -p /opt/wiki/data/dumps && cd /opt/wiki/data/dumps
 transmission-cli --download-dir . 'magnet:?xt=urn:btih:O2F3E2JKCEEBCULFP2E2MRUGEVFEIHZW'
 
 # Or download via HTTPS from one of the mirrors:
-wget -c 'https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/wikipedia_en_all_novid_2018-10.zim'
-wget -c 'https://ftpmirror.your.org/pub/kiwix/zim/wikipedia/wikipedia_en_all_novid_2018-10.zim'
-wget -c 'https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_novid_2018-10.zim'
+wget -c 'https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/wikipedia_en_all_maxi_2018-10.zim'
+wget -c 'https://ftpmirror.your.org/pub/kiwix/zim/wikipedia/wikipedia_en_all_maxi_2018-10.zim'
+wget -c 'https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_maxi_2018-10.zim'
 
 # Optionally after download, verify the length (fast) or MD5 checksum (slow):
-stat --printf="%s" wikipedia_en_all_novid_2018-10.zim | grep 83853668638
-md5sum wikipedia_en_all_novid_2018-10.zim | openssl dgst -md5 -binary | openssl enc -base64 | grep 01eMQki29P9vD5F2h6zWwQ
+stat --printf="%s" wikipedia_en_all_maxi_2018-10.zim | grep 83853668638
+md5sum wikipedia_en_all_maxi_2018-10.zim | openssl dgst -md5 -binary | openssl enc -base64 | grep 01eMQki29P9vD5F2h6zWwQ
 ```
 
 ### XML Database Dump
@@ -216,7 +217,7 @@ Database dumps are usually published monthly.  As of August 2019, the latest dum
 
  **[`enwiki-20190720-pages-articles.xml.bz2`](https://meta.wikimedia.org/wiki/Data_dump_torrents#English_Wikipedia)** (15GB, all English articles, no pictures/videos)
 
-[`simplewiki-20170820-pages-meta-current.xml.bz2`](http://itorrents.org/torrent/B23A2BDC351E58E041D79F335A3CF872DEBAE919.torrent) (180MB, SimpleWiki only, good for testing)
+[`simplewiki-20170820-pages-meta-current.xml.bz2`](https://itorrents.org/torrent/B23A2BDC351E58E041D79F335A3CF872DEBAE919.torrent) (180MB, SimpleWiki only, good for testing)
 
 **Download your chosen Wikipedia XML dump** (e.g. `enwiki-20190720-pages-articles.xml.bz2`)
 
@@ -275,7 +276,7 @@ Alternatively, check out a similar setup that uses Caddy instead of Nginx as the
 > <span style="color:#444">**Content freshness:**</span> <span style="color:red">Often Stale</span>  
 > ZIM archives are published yearly (ish) by Wikipedia.org.  
 
-First download a ZIM archive dump like `wikipedia_en_all_novid_2018-10.zim` into `/opt/wiki/data/dumps` as described above.
+First download a ZIM archive dump like `wikipedia_en_all_maxi_2018-10.zim` into `/opt/wiki/data/dumps` as described above.
 
 
 ### a. Running with Docker
@@ -287,7 +288,7 @@ docker run \
     -v '/opt/wiki/data/dumps:/data' \
     -p 8888:80 \
     kiwix/kiwix-serve \
-    'wikipedia_en_all_novid_2018-10.zim'
+    'wikipedia_en_all_maxi_2018-10.zim'
 ```
 
 Or create `/opt/wiki/docker-compose.yml` and run `docker-compose up`:
@@ -296,7 +297,7 @@ version: '3'
 services:
   kiwix:
     image: kiwix/kiwix-serve
-    command: 'wikipedia_en_all_novid_2018-10.zim'
+    command: 'wikipedia_en_all_maxi_2018-10.zim'
     ports:
       - '8888:80'
     volumes:
@@ -320,7 +321,7 @@ services:
 2. **Run `kiwix-serve`, passing it a port to listen on and your ZIM archive file**
 
     ```bash
-    /opt/wiki/bin/kiwix-serve --port 8888 /opt/wiki/data/dumps/wikipedia_en_all_novid_2018-10.zim
+    /opt/wiki/bin/kiwix-serve --port 8888 /opt/wiki/data/dumps/wikipedia_en_all_maxi_2018-10.zim
     ```
 
     Your server should now be running!
@@ -633,9 +634,9 @@ services:
 
 - https://github.com/openzim/mwoffliner (archiving only, no serving)
 - https://www.yunqa.de/delphi/products/wikitaxi/index (Windows only)
-- http://www.nongnu.org/wp-mirror/ (last updated in 2014, [Dockerfile](https://github.com/futpib/docker-wp-mirror/blob/master/Dockerfile))
+- https://www.nongnu.org/wp-mirror/ (last updated in 2014, [Dockerfile](https://github.com/futpib/docker-wp-mirror/blob/master/Dockerfile))
 - https://github.com/dustin/go-wikiparse
-- http://www.learn4master.com/tools/python-and-java-libraries-to-parse-wikipedia-dump-dataset
+- https://www.learn4master.com/tools/python-and-java-libraries-to-parse-wikipedia-dump-dataset
 - https://dkpro.github.io/dkpro-jwpl/
 - https://towardsdatascience.com/wikipedia-data-science-working-with-the-worlds-largest-encyclopedia-c08efbac5f5c
 - https://meta.wikimedia.org/wiki/Data_dumps/Import_examples#Import_into_an_empty_wiki_of_a_subset_of_en_wikipedia_on_Linux_with_MySQL
