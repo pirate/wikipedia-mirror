@@ -54,7 +54,7 @@ Wikipedia.org itself is powered by a PHP backend called [WikiMedia](https://en.w
 
 **💅Don't expect it to look perfect on the first try**
 
-Setting up a Wikipidea mirror involves a complex dance between software, data, and sysadmin, so beginners are encouraged to start with the static html archive or proxy and before attempting to run a full MediaWiki Server. Users should expect their mirrors to be able to serve text articles without images, but should not expect it to look like Wikipedia.org on the first try, or the second, or the third...
+Setting up a Wikipidea mirror involves a complex dance between software, data, and devops, so beginners are encouraged to start with the static html archive or proxy and before attempting to run a full MediaWiki Server. Users should expect their mirrors to be able to serve articles with images and search, but should not expect it to look exactly like Wikipedia.org on the first try, or the second...
 
 **✅ Choosing an approach**
 
