@@ -185,7 +185,7 @@ ZIM archive dumps are usually published yearly, but the release schedule is not 
 
 [`wikipedia_en_all_nopic_2018-09.zim`](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic_2018-09.zim) ([torrent](https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_nopic_2018-09.zim.torrent)) (35GB, all English articles, no pictures or video)
 
-**[`wikipedia_en_all_maxi_2018-10.zim`](https://download.kiwix.org/zim/wikipedia_en_all_maxi.zim)** ((torrent)[https://download.kiwix.org/zim/wikipedia_en_all_maxi.zim.torrent]) (79GB, all English articles w/ pictures, no video)
+**[`wikipedia_en_all_maxi_2018-10.zim`](https://download.kiwix.org/zim/wikipedia_en_all_maxi.zim)** ([torrent](https://download.kiwix.org/zim/wikipedia_en_all_maxi.zim.torrent)) (79GB, all English articles w/ pictures, no video)
 
 [`wikipedia_en_simple_all_maxi_2020-01.zim`](https://dumps.wikimedia.org/other/kiwix/zim/wikipedia/wikipedia_en_simple_all_maxi_2020-01.zim) (1.6GB, SimpleWiki English only, good for testing)
 
